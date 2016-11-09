@@ -1,0 +1,13 @@
+[
+    {
+        "request": {
+            "method": "POST",
+            "path": "/form"
+        },
+        "response": {
+            "data": {
+                "result": "This is the default 200 result"
+            }
+        }
+    }
+]

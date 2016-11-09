@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Example</title>
+</head>
+<body ng-app="app">
+
+    <div ng-controller="MyFormController">
+        <form ng-submit="onSubmit()">
+            <input type="text" name="something" ng-model="something">
+            <button type="submit">Submit</button>
+        </form>
+        <p class="result">{{ result }}</p>
+    </div>
+
+    <script src="lib/angular/angular.min.js"></script>
+    <script>
+        angular.module('app', [])
+            .controller('MyFormController', function ($scope, $http) {
+                $scope.onSubmit = function () {
+                    var data = {
+                        value: $scope.something
+                    };
+                    $http.post('/form', data)
+                        .then(function (response) {
+                            $scope.result = response.data && response.data.result;
+                        })
+                        .catch(function (response) {
+                            $scope.result = response.status + ': ' + response.statusText;
+                        })
+                }
+            });
+    </script>
+
+</body>
+</html>

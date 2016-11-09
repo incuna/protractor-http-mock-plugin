@@ -1,0 +1,20 @@
+{
+  "name": "example",
+  "authors": [
+    "Henry Blyth <blyth.henry@gmail.com>"
+  ],
+  "description": "An example test for protractor-http-mock-plugin",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8"
+  }
+}

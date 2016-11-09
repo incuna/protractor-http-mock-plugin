@@ -1,0 +1,21 @@
+{
+  "name": "protractor-http-mock-plugin",
+  "version": "1.0.0",
+  "description": "A wrapper around https://github.com/atecarlos/protractor-http-mock to make it a Protractor plugin",
+  "main": "lib/protractor-http-mock-plugin.js",
+  "scripts": {
+    "protractor": "webdriver-manager update && protractor example/protractor.conf.js",
+    "server": "http-server ./example/app -a localhost -p 9000",
+    "test": "npm run protractor"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "lodash.without": "^4.4.0",
+    "protractor": "*",
+    "protractor-http-mock": "git://github.com/incuna/protractor-http-mock.git#b1fb77e000b36a4913eceff176a3190434ac7247"
+  },
+  "devDependencies": {
+    "http-server": "0.9.0"
+  }
+}
