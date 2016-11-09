@@ -1,4 +1,4 @@
-# protractor-http-mock-plugin
+# protractor-http-mock-plugin [![Build Status](https://travis-ci.org/incuna/protractor-http-mock-plugin.svg?branch=master)](https://travis-ci.org/incuna/protractor-http-mock-plugin)
 
 A wrapper around [protractor-http-mock](https://github.com/atecarlos/protractor-http-mock) to make it a Protractor plugin.
 
