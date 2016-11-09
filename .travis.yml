@@ -26,10 +26,9 @@ env:
 
 before_install:
     - npm install -g bower
-    - cd example && bower install --verbose
 
 before_script:
-    - cd example && bower install --verbose
+    - cd example && bower install --verbose && cd ..
 
 script:
     - npm run server &
