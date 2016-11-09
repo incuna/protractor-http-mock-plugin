@@ -1,6 +1,8 @@
 'use strict';
 
-const mocks = require('../../lib/protractor-http-mock-plugin'); // require('protractor-http-mock-plugin');
+const mocks = require('../../lib/protractor-http-mock-plugin');
+// Substitute with:
+// const mocks = require('protractor-http-mock-plugin');
 
 describe('Example', function () {
 
@@ -97,7 +99,7 @@ describe('Example', function () {
 
         describe('mock files added after browser.get', function () {
             it('should not work', function () {
-                mocks.load()
+                mocks.load();
                 browser.get('/');
                 expect(() => {
                     mocks.add([
