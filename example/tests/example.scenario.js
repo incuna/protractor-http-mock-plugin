@@ -67,10 +67,25 @@ describe('Example', function () {
 
     });
 
+    /* eslint-disable no-console */
     describe('not working:', function () {
 
+        beforeEach(function () {
+            spyOn(console, 'log');
+            spyOn(console, 'error');
+        });
+
         describe('invalid mocks before browser.get', function () {
-            it('should not work', function () {
+            it('should not work for non-objects', function () {
+                expect(() => {
+                    mocks.load([
+                        null
+                    ]);
+                }).toThrowError('Invalid mocks');
+                expect(console.error).toHaveBeenCalledWith('Invalid mock: must be an object or string');
+                expect(console.log).toHaveBeenCalledWith(null);
+            });
+            it('should not work for invalid objects', function () {
                 expect(() => {
                     mocks.load([
                         {
@@ -79,11 +94,28 @@ describe('Example', function () {
                         }
                     ]);
                 }).toThrowError('Invalid mocks');
+                expect(console.error).toHaveBeenCalledWith('Invalid mock object: must have a request property');
+                expect(console.error).toHaveBeenCalledWith('Invalid mock object: must have a response property');
+                expect(console.log).toHaveBeenCalledWith({
+                    foo: 'bar',
+                    x: 2
+                });
             });
         });
 
-        describe('invalid mocks after browser.get', function () {
-            it('should not work', function () {
+        describe('invalid mocks added after browser.get', function () {
+            it('should not work for non-objects', function () {
+                mocks.load();
+                browser.get('/');
+                expect(() => {
+                    mocks.add([
+                        null
+                    ]);
+                }).toThrowError('Invalid mocks for the browser: must be an inline request/response object');
+                expect(console.error).toHaveBeenCalledWith('Invalid mock: must be an object or string');
+                expect(console.log).toHaveBeenCalledWith(null);
+            });
+            it('should not work for invalid objects', function () {
                 mocks.load();
                 browser.get('/');
                 expect(() => {
@@ -94,11 +126,17 @@ describe('Example', function () {
                         }
                     ]);
                 }).toThrowError('Invalid mocks for the browser: must be an inline request/response object');
+                expect(console.error).toHaveBeenCalledWith('Invalid mock object: must have a request property');
+                expect(console.error).toHaveBeenCalledWith('Invalid mock object: must have a response property');
+                expect(console.log).toHaveBeenCalledWith({
+                    foo: 'bar',
+                    x: 2
+                });
             });
         });
 
         describe('mock files added after browser.get', function () {
-            it('should not work', function () {
+            it('should skip console logging and not work', function () {
                 mocks.load();
                 browser.get('/');
                 expect(() => {
@@ -107,9 +145,13 @@ describe('Example', function () {
                         'bar'
                     ]);
                 }).toThrowError('Invalid mocks for the browser: must be an inline request/response object');
+                expect(console.error).not.toHaveBeenCalledWith('Invalid mock: must be an object or string');
+                expect(console.log).not.toHaveBeenCalledWith('foo');
+                expect(console.log).not.toHaveBeenCalledWith('bar');
             });
         });
 
     });
+    /* eslint-disable no-console */
 
 });
