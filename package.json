@@ -6,6 +6,7 @@
   "scripts": {
     "protractor": "webdriver-manager update && protractor example/protractor.conf.js",
     "server": "http-server ./example/app -a localhost -p 9000",
+    "lint": "eslint .",
     "test": "npm run protractor"
   },
   "author": "",

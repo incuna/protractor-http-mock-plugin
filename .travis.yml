@@ -35,5 +35,6 @@ before_script:
 
 script:
     - alias firefox-bin='firefox'
+    - npm run lint
     - npm run server &
     - npm test
