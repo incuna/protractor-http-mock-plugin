@@ -7,7 +7,7 @@ const path = require('path');
 exports.config = {
     baseUrl: 'http://localhost:9000/',
     capabilities: {
-        browserName: 'chrome'
+        browserName: process.env.TRAVIS ? 'firefox' : 'chrome'
     },
     specs: ['tests/**/*[sS]cenario.js'],
     plugins: [
