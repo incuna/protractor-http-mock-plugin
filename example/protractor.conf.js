@@ -9,6 +9,7 @@ exports.config = {
     capabilities: {
         browserName: process.env.TRAVIS ? 'firefox' : 'chrome'
     },
+    directConnect: true,
     specs: ['tests/**/*[sS]cenario.js'],
     plugins: [
         {
