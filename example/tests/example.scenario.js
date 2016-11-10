@@ -109,11 +109,30 @@ describe('Example', function () {
                 browser.get('/');
                 expect(() => {
                     mocks.add([
-                        null
+                        undefined,
+                        null,
+                        false,
+                        true
                     ]);
                 }).toThrowError('Invalid mocks for the browser: must be an inline request/response object');
                 expect(console.error).toHaveBeenCalledWith('Invalid mock: must be an object or string');
+            });
+            it('should validate all mocks', function () {
+                mocks.load();
+                browser.get('/');
+                expect(() => {
+                    mocks.add([
+                        undefined,
+                        null,
+                        false,
+                        true
+                    ]);
+                }).toThrowError('Invalid mocks for the browser: must be an inline request/response object');
+                expect(console.error).toHaveBeenCalledWith('Invalid mock: must be an object or string');
+                expect(console.log).toHaveBeenCalledWith(undefined);
                 expect(console.log).toHaveBeenCalledWith(null);
+                expect(console.log).toHaveBeenCalledWith(false);
+                expect(console.log).toHaveBeenCalledWith(true);
             });
             it('should not work for invalid objects', function () {
                 mocks.load();
@@ -136,7 +155,7 @@ describe('Example', function () {
         });
 
         describe('mock files added after browser.get', function () {
-            it('should skip console logging and not work', function () {
+            it('should fail validation early and not work', function () {
                 mocks.load();
                 browser.get('/');
                 expect(() => {
@@ -145,6 +164,7 @@ describe('Example', function () {
                         'bar'
                     ]);
                 }).toThrowError('Invalid mocks for the browser: must be an inline request/response object');
+                expect(console.error).toHaveBeenCalledWith('Invalid mock for browser: cannot be string');
                 expect(console.error).not.toHaveBeenCalledWith('Invalid mock: must be an object or string');
                 expect(console.log).not.toHaveBeenCalledWith('foo');
                 expect(console.log).not.toHaveBeenCalledWith('bar');
