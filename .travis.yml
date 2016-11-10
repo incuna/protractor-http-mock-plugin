@@ -15,7 +15,7 @@ cache:
         - $HOME/.cache/bower
 
 addons:
-    firefox: latest
+    firefox: 39.0.3
     apt:
         sources:
             - ubuntu-toolchain-r-test
