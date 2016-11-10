@@ -34,5 +34,6 @@ before_script:
     - cd example && bower install --verbose && cd ..
 
 script:
+    - alias firefox-bin='firefox'
     - npm run server &
     - npm test
